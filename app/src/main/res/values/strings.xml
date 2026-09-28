@@ -12,7 +12,11 @@
     <string name="save">Save</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
-    <string name="no_recipes_match">No recipes match your pantry yet — add more ingredients!</string>
+    <string name="no_recipes_match">No recipes match your pantry yet - add more ingredients!</string>
+    <plurals name="recipes_you_can_make">
+        <item quantity="one">%d recipe you can make</item>
+        <item quantity="other">%d recipes you can make</item>
+    </plurals>
     <string name="empty_pantry">Your pantry is empty. Tap + to add ingredients.</string>
     <string name="recipe_detail">Recipe Detail</string>
     <string name="ingredients_label">Ingredients</string>

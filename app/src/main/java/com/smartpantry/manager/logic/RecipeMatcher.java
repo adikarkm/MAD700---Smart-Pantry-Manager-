@@ -140,4 +140,41 @@ public class RecipeMatcher {
         }
         return unit.trim().toLowerCase();
     }
+
+    // "Almost There" (bonus) - recipes missing exactly ONE ingredient.
+    // These are kept separate from the strict suggestions above.
+    // Returns each recipe with the name of the ingredient it still needs.
+    public static Map<Recipe, String> getAlmostThereRecipes(
+            List<PantryItem> pantryItems,
+            List<Recipe> allRecipes,
+            Map<Integer, List<RecipeIngredient>> recipeIngredientsMap) {
+
+        Map<Recipe, String> almostThere = new java.util.LinkedHashMap<>();
+
+        for (Recipe recipe : allRecipes) {
+            List<RecipeIngredient> ingredients = recipeIngredientsMap.get(recipe.getId());
+            if (ingredients == null || ingredients.isEmpty()) {
+                continue;
+            }
+
+            // Count the ingredients that are missing or not enough
+            int missingCount = 0;
+            String missingName = null;
+            for (RecipeIngredient needed : ingredients) {
+                if (!hasEnough(pantryItems, needed)) {
+                    missingCount++;
+                    missingName = needed.getIngredientName();
+                    if (missingCount > 1) {
+                        break; // more than one missing, so it is not "almost there"
+                    }
+                }
+            }
+
+            if (missingCount == 1) {
+                almostThere.put(recipe, missingName);
+            }
+        }
+
+        return almostThere;
+    }
 }

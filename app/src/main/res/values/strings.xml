@@ -33,6 +33,9 @@
     <string name="confirm_delete_title">Delete Ingredient</string>
     <string name="confirm_delete_message">Are you sure you want to delete this ingredient?</string>
     <string name="suggested_recipes">Suggested Recipes</string>
+    <!-- Almost There list (recipes missing one ingredient) -->
+    <string name="almost_there_title">Almost There (missing 1 ingredient)</string>
+    <string name="almost_there_needs">Still needs: %1$s</string>
     <string name="set_expiry_date">Set Expiry Date</string>
     <string name="no_expiry">No expiry set</string>
     <string name="select_unit">Select Unit</string>

@@ -9,6 +9,7 @@ Smart Pantry Manager is an Android app made in Java for the Mobile App Developme
 - **Pantry:** add, edit and delete pantry items (name, quantity, unit and an optional expiry date)
 - **Recipes:** 16 recipes that are loaded into the database the first time the app opens
 - **Suggested Recipes:** shows only the recipes you can make right now
+- **Almost There:** a separate list under the suggestions showing recipes that are missing only one ingredient, and what they still need
 - **Recipe Detail:** the ingredients and steps for a recipe
 - **Expiry alerts:** items that are expired or expire within 3 days are highlighted, and a pop-up lists them when the app opens
 - **Settings:** turn the expiry alerts on or off and switch on a high contrast dark mode

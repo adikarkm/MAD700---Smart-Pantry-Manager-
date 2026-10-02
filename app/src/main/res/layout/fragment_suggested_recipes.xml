@@ -32,4 +32,32 @@
             android:text="@string/no_recipes_match"
             android:visibility="gone" />
     </FrameLayout>
+
+    <!-- Almost There (bonus): recipes missing only one ingredient, kept separate from the strict list -->
+    <LinearLayout
+        android:id="@+id/layout_almost_there"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="@string/almost_there_title"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_almost_there"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 </LinearLayout>

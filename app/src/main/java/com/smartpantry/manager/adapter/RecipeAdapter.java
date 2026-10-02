@@ -11,13 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.smartpantry.manager.R;
 import com.smartpantry.manager.model.Recipe;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // Adapter that shows each suggested recipe as a card in the RecyclerView
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
 
     private List<Recipe> recipes;
     private OnRecipeClickListener listener;
+    // Recipe ID -> missing ingredient (only used by the Almost There list)
+    private Map<Integer, String> missingIngredients = new HashMap<>();
 
     // Lets the fragment know which recipe was tapped
     public interface OnRecipeClickListener {
@@ -37,12 +41,17 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         return new ViewHolder(view);
     }
 
-    // Fills a card with the recipe name and description
+    // Fills a card with the recipe name and description (or what it still needs)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Recipe recipe = recipes.get(position);
         holder.tvRecipeName.setText(recipe.getName());
-        holder.tvRecipeDescription.setText(recipe.getDescription());
+        String missing = missingIngredients.get(recipe.getId());
+        if (missing != null) {
+            holder.tvRecipeDescription.setText(holder.itemView.getContext().getString(R.string.almost_there_needs, missing));
+        } else {
+            holder.tvRecipeDescription.setText(recipe.getDescription());
+        }
 
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
@@ -60,6 +69,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     public void updateData(List<Recipe> recipes) {
         this.recipes = recipes;
         notifyDataSetChanged();
+    }
+
+    // Sets which ingredient each recipe is missing (for the Almost There list)
+    public void setMissingIngredients(Map<Integer, String> missingIngredients) {
+        this.missingIngredients = missingIngredients;
     }
 
     // Holds the views for one card

@@ -1,12 +1,12 @@
 package com.smartpantry.manager.adapter;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartpantry.manager.R;
@@ -23,8 +23,8 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.ViewHolder
     private List<PantryItem> pantryItems;
     private OnItemClickListener listener;
     private boolean showExpiryWarnings = true; // controlled by the Expiry Alerts setting
-    // Items expiring within 3 days are highlighted
-    private static final long THREE_DAYS_MS = 3L * 24 * 60 * 60 * 1000;
+    // Items expiring within 3 days are highlighted (public so the expiry pop-up uses it too)
+    public static final long THREE_DAYS_MS = 3L * 24 * 60 * 60 * 1000;
 
     // Lets the fragment react to taps, long presses and the delete button
     public interface OnItemClickListener {
@@ -57,7 +57,7 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.ViewHolder
 
         if (item.getExpiryDate() == null) {
             holder.tvExpiry.setText("No expiry");
-            holder.tvExpiry.setTextColor(Color.GRAY);
+            holder.tvExpiry.setTextColor(getColour(holder, R.color.text_secondary));
         } else {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
             holder.tvExpiry.setText(sdf.format(new Date(item.getExpiryDate())));
@@ -66,13 +66,13 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.ViewHolder
             // Only done when Expiry Alerts is switched on in Settings.
             long timeDiff = item.getExpiryDate() - System.currentTimeMillis();
             if (!showExpiryWarnings) {
-                holder.tvExpiry.setTextColor(Color.GRAY);
+                holder.tvExpiry.setTextColor(getColour(holder, R.color.text_secondary));
             } else if (timeDiff < 0) {
-                holder.tvExpiry.setTextColor(Color.parseColor("#D32F2F"));
+                holder.tvExpiry.setTextColor(getColour(holder, R.color.error));
             } else if (timeDiff <= THREE_DAYS_MS) {
-                holder.tvExpiry.setTextColor(Color.parseColor("#FF5722"));
+                holder.tvExpiry.setTextColor(getColour(holder, R.color.expiry_warning));
             } else {
-                holder.tvExpiry.setTextColor(Color.GRAY);
+                holder.tvExpiry.setTextColor(getColour(holder, R.color.text_secondary));
             }
         }
 
@@ -120,6 +120,11 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.ViewHolder
             pantryItems.remove(position);
             notifyItemRemoved(position);
         }
+    }
+
+    // Gets a colour from colors.xml (the dark version is used when Dark Mode is on)
+    private int getColour(ViewHolder holder, int colourId) {
+        return ContextCompat.getColor(holder.itemView.getContext(), colourId);
     }
 
     // Holds the views for one card so they are not looked up every time

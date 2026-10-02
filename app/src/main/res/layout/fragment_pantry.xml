@@ -26,7 +26,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         app:srcCompat="@drawable/ic_add"
-        app:tint="@android:color/white"
+        app:backgroundTint="@color/fab_background"
+        app:tint="@color/on_accent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

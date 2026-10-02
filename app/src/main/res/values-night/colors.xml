@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- High contrast dark mode colours.
+     Android uses these instead of values/colors.xml when Dark Mode is on.
+     Text colours have at least 7:1 contrast against the dark backgrounds. -->
+<resources>
+    <color name="primary">#1B5E20</color>        <!-- toolbar and Save button (white text on top) -->
+    <color name="primary_dark">#000000</color>   <!-- status bar -->
+    <color name="primary_bright">#69F0AE</color> <!-- headings, selected tab, buttons and text boxes -->
+    <color name="accent">#FFB74D</color>         <!-- + button and switches -->
+    <color name="on_accent">#000000</color>      <!-- plus sign on the + button -->
+    <color name="fab_background">#CE93D8</color> <!-- light purple + button -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#E0E0E0</color>
+    <color name="background">#000000</color>
+    <color name="surface">#1E1E1E</color>        <!-- cards, bottom bar and pop-ups -->
+    <color name="error">#FF8A80</color>          <!-- expired dates -->
+    <color name="expiry_warning">#FFB74D</color> <!-- dates expiring soon -->
+    <color name="divider">#9E9E9E</color>
+</resources>

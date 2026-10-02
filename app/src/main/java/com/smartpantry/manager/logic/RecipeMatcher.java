@@ -61,8 +61,8 @@ public class RecipeMatcher {
                 continue;
             }
 
-            // Units must be comparable (e.g. g and kg are fine, g and cups are not)
-            if (!neededGroup.equals(getUnitGroup(item.getUnit()))) {
+            // Units must be comparable (g and kg are fine, g and cups are not, tsp/tbsp work with g)
+            if (!unitsCanBeCompared(neededGroup, needed.getUnit(), item.getUnit())) {
                 continue;
             }
 
@@ -74,6 +74,23 @@ public class RecipeMatcher {
         }
 
         return false;
+    }
+
+    // Units can be compared if they are in the same group, or if one is a
+    // teaspoon/tablespoon and the other is g or kg (1 tsp = 5 g, 1 tbsp = 15 g)
+    private static boolean unitsCanBeCompared(String neededGroup, String neededUnit, String pantryUnit) {
+        String pantryGroup = getUnitGroup(pantryUnit);
+        if (neededGroup.equals(pantryGroup)) {
+            return true;
+        }
+        return (isSpoon(neededUnit) && pantryGroup.equals(GROUP_WEIGHT))
+                || (isSpoon(pantryUnit) && neededGroup.equals(GROUP_WEIGHT));
+    }
+
+    // True for teaspoons and tablespoons
+    private static boolean isSpoon(String unit) {
+        String u = cleanUnit(unit);
+        return u.equals("tsp") || u.equals("tbsp");
     }
 
     // Works out which group a unit belongs to
@@ -104,9 +121,9 @@ public class RecipeMatcher {
             case "l":
                 return quantity * 1000;
             case "tsp":
-                return quantity * 5;
+                return quantity * 5;   // 1 tsp = 5 ml or 5 g
             case "tbsp":
-                return quantity * 15;
+                return quantity * 15;  // 1 tbsp = 15 ml or 15 g
             case "cups":
             case "cup":
                 return quantity * 240;

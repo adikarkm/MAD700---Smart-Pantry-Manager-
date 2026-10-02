@@ -13,4 +13,8 @@
     <color name="divider">#BDBDBD</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <!-- Added for dark mode (values-night/colors.xml has the dark versions) -->
+    <color name="primary_bright">#4CAF50</color> <!-- headings and selected tab -->
+    <color name="on_accent">#FFFFFF</color>      <!-- plus sign on the + button -->
+    <color name="fab_background">#7B1FA2</color> <!-- purple + button -->
 </resources>

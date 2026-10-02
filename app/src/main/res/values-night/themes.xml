@@ -1,0 +1,20 @@
+<resources>
+    <!-- High contrast dark theme. Used instead of values/themes.xml when Dark Mode is on in Settings. -->
+    <style name="Theme.SmartPantryManager" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Bright green so buttons, text boxes and pop-up buttons stand out on black -->
+        <item name="colorPrimary">@color/primary_bright</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/accent</item>
+        <item name="colorSecondaryVariant">@color/accent</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Black screen with dark grey cards, bottom bar and pop-ups -->
+        <item name="android:colorBackground">@color/background</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/white</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+    </style>
+</resources>
